@@ -40,7 +40,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen options={globalStyle.headerOptions} name="LoginRegScreen" component={LoginRegScreen}/>
         <Stack.Screen options={globalStyle.headerOptions} name="ChooseUserNameScreen" component={ChooseUserNameScreen}/>
         <Stack.Screen options={globalStyle.headerOptions} name="ChatScreen" component={ChatScreen}/>

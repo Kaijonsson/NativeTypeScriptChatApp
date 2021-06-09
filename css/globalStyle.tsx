@@ -27,12 +27,9 @@ const globalStyle = {
   mainWidthDistance: 5,
 
   headerOptions: {
-    title: "",
     headerStyle:{
-
       backgroundColor: "rgb(230, 252, 197)",
     }
-
   }
 
 };
