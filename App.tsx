@@ -4,34 +4,46 @@ import {NavigationContainer} from "@react-navigation/native"
 import "react-native-gesture-handler"
 import { createStackNavigator } from '@react-navigation/stack';
 
-import firebase from "firebase/app"
-import "firebase/database"
-
 import LoginRegScreen from "./screens/LoginRegScreen"
 import ChooseUserNameScreen from "./screens/ChooseUsernameScreen"
 import ChatScreen from "./screens/ChatScreen"
-export default function App() {
 
-  var firebaseConfig = {
-    apiKey: "AIzaSyAGIH7M-Sutr1ShDeMJaTeIIJsBP3-8Kqk",
-    authDomain: "chapapp-ff982.firebaseapp.com",
-    databaseURL: "https://chapapp-ff982-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "chapapp-ff982",
-    storageBucket: "chapapp-ff982.appspot.com",
-    messagingSenderId: "937474970037",
-    appId: "1:937474970037:web:681d09518945ac284689fc"
-  };
-  // Initialize Firebase
+import globalStyle from "./css/globalStyle"
+
+import firebase from "firebase/app"
+import "firebase/database"
+import "firebase/auth"
+
+import * as WebBrowser from 'expo-web-browser';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAzSuTVB7AAcdBszY3puM36ytPnkQmFutE",
+  authDomain: "redmind-chat-app.firebaseapp.com",
+  databaseURL: "https://redmind-chat-app-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "redmind-chat-app",
+  storageBucket: "redmind-chat-app.appspot.com",
+  messagingSenderId: "501073455568",
+  appId: "1:501073455568:web:fb9b698b168888c7e871d5"
+};
+
+if(!firebase.apps.length){
+
   firebase.initializeApp(firebaseConfig);
+}
+WebBrowser.maybeCompleteAuthSession();
+
+
+export default function App() {
 
   const Stack = createStackNavigator();
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login Register" component={LoginRegScreen}/>
-        <Stack.Screen name="ChooseUserNameScreen" component={ChooseUserNameScreen}/>
-        <Stack.Screen name="ChatScreen" component={ChatScreen}/>
+        <Stack.Screen options={globalStyle.headerOptions} name="LoginRegScreen" component={LoginRegScreen}/>
+        <Stack.Screen options={globalStyle.headerOptions} name="ChooseUserNameScreen" component={ChooseUserNameScreen}/>
+        <Stack.Screen options={globalStyle.headerOptions} name="ChatScreen" component={ChatScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
