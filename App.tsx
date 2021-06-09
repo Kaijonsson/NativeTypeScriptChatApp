@@ -14,8 +14,7 @@ import firebase from "firebase/app"
 import "firebase/database"
 import "firebase/auth"
 
-import * as WebBrowser from 'expo-web-browser';
-
+import {RootStackParamList} from "./types/types"
 
 const firebaseConfig = {
   apiKey: "AIzaSyAzSuTVB7AAcdBszY3puM36ytPnkQmFutE",
@@ -31,20 +30,23 @@ if(!firebase.apps.length){
 
   firebase.initializeApp(firebaseConfig);
 }
-WebBrowser.maybeCompleteAuthSession();
 
 
 export default function App() {
 
-  const Stack = createStackNavigator();
+  
+ 
+  // const Stack = createStackNavigator();
+  const RootStack = createStackNavigator<RootStackParamList>()
+
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen options={globalStyle.headerOptions} name="LoginRegScreen" component={LoginRegScreen}/>
-        <Stack.Screen options={globalStyle.headerOptions} name="ChooseUserNameScreen" component={ChooseUserNameScreen}/>
-        <Stack.Screen options={globalStyle.headerOptions} name="ChatScreen" component={ChatScreen}/>
-      </Stack.Navigator>
+      <RootStack.Navigator initialRouteName="LoginRegScreen" screenOptions={{headerShown: false}}>
+        <RootStack.Screen options={globalStyle.headerOptions} name="LoginRegScreen" component={LoginRegScreen}/>
+        <RootStack.Screen options={globalStyle.headerOptions} name="ChooseUserNameScreen" component={ChooseUserNameScreen} initialParams={{googleResult: Object}}/>
+        <RootStack.Screen options={globalStyle.headerOptions} name="ChatScreen" component={ChatScreen}/>
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 }

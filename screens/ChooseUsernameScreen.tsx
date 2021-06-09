@@ -1,32 +1,30 @@
 import React from 'react'
-import { StyleSheet, Button, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import globalStyle from "../css/globalStyle"
 
-import firebase from 'firebase';
-import "firebase/auth"
+import Logout from "../components/Logout"
 
 import { useNavigation } from '@react-navigation/native';
 
+import {Props} from "../types/types"
 
 
 
-const ChooseUsername = ({route}: {route: Object}) => {
+const ChooseUsername = ({route}: Props) => {
 
     const navigation = useNavigation()
-    console.log("ROUTE: ", route)
 
-    const logOut = () => {
-        firebase.auth().signOut().then(() => {
-            console.log("signed out")
-            navigation.navigate("LoginRegScreen")
-          }).catch((error) => {
-              console.log(error)
-          });
-      }
+    console.log("ROUTE: ", route)
+    console.log("ROUTE+: ", route.params.googleResult)
+
+
 
     return (
         <View style={styles.container}>
-            <Button onPress={logOut} title="Sign Out"/>
+            <View>
+                <Text style={styles.text}>Hello</Text>
+            </View>
+            <Logout/>
         </View>
     )
 }
@@ -39,5 +37,8 @@ const styles = StyleSheet.create({
         backgroundColor: globalStyle.mainBackgroundColor,
         justifyContent: "center",
         alignItems: "center",
+    },
+    text: {
+        fontSize: globalStyle.textFontSize,
     }
 })

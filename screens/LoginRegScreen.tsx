@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 
 import globalStyle from "../css/globalStyle"
@@ -29,7 +29,8 @@ const LoginRegScreen = () => {
               if (result.type  === 'success') {
                 const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken, result.accessToken);
                 firebase.auth().signInWithCredential(credential);
-                navigation.navigate("ChooseUserNameScreen", {googleResult: result})
+                const user = result.user
+                navigation.navigate("ChooseUserNameScreen", {googleResult: user})
               }
             } catch ({ message }) {
               alert('login: Error:' + message);
@@ -68,13 +69,21 @@ const styles = StyleSheet.create({
       },
       loginProviders: {
         flexDirection: "row",
-        minHeight: 80,
-        marginTop: globalStyle.elementMarginTop
+        marginTop: globalStyle.elementMarginTop,
+        backgroundColor: globalStyle.mainBackgroundColor,
+        height: 150,
+        width: 150,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 100,
+        borderColor: globalStyle.mainColorGreen,
+        borderStyle: "solid",
+        borderWidth: 10,
       },
       providerImage: {
           height: 80,
           width: 80,
-      }
+      },
 
 
 })
