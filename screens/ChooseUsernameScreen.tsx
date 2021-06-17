@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import globalStyle from "../css/globalStyle"
 
@@ -14,15 +14,18 @@ const ChooseUsername = ({route}: Props) => {
 
     const navigation = useNavigation()
 
+
     console.log("ROUTE: ", route)
-    console.log("ROUTE+: ", route.params.googleResult)
+
+    console.log("User: ", route.params.username)
+    const userName = route.params.username
 
 
 
     return (
         <View style={styles.container}>
             <View>
-                <Text style={styles.text}>Hello</Text>
+                <Text style={styles.text}>Hello {userName}</Text>
             </View>
             <Logout/>
         </View>

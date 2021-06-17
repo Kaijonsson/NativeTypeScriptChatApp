@@ -29,8 +29,8 @@ const LoginRegScreen = () => {
               if (result.type  === 'success') {
                 const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken, result.accessToken);
                 firebase.auth().signInWithCredential(credential);
-                const user = result.user
-                navigation.navigate("ChooseUserNameScreen", {googleResult: user})
+            
+                navigation.navigate("ChooseUserNameScreen", {username : result.user.name})
               }
             } catch ({ message }) {
               alert('login: Error:' + message);

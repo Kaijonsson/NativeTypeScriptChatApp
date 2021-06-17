@@ -4,7 +4,7 @@ import {StackScreenProps} from "@react-navigation/stack"
 
 export type RootStackParamList = {
     LoginRegScreen: undefined;
-    ChooseUserNameScreen: {googleResult: Object};
+    ChooseUserNameScreen: Object;
     ChatScreen: undefined;
 
   }

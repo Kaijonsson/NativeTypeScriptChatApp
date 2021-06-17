@@ -4,7 +4,7 @@ const globalStyle = {
   mainBackgroundColor: "rgb(230, 252, 197)",
 
   //Other Colors
-  mainColorGreen: "rgb(189, 247, 106)",
+  mainColorGreen: "rgb(139, 171, 92)",
 
   //Header Options: 
   headerOneFontSize: 30,
