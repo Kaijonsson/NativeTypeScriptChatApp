@@ -1,31 +1,42 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import globalStyle from "../css/globalStyle"
 
 import Logout from "../components/Logout"
+import NewNameModal from '../components/chooseUserNameScreen/NewNameModal'
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/core'
 
 import {Props} from "../types/types"
 
-
+import "firebase/auth"
+import firebase from "firebase"
 
 const ChooseUsername = ({route}: Props) => {
 
     const navigation = useNavigation()
 
-
     console.log("ROUTE: ", route)
 
-    console.log("User: ", route.params.username)
-    const userName = route.params.username
+    const userName = route.params.user.name
+    const activeUser = route.params.user
 
+    const nextPage = () => {
+        navigation.navigate("ChatScreen", {activeUser})
+    }
 
+    console.log("CURRENTUSER: ", firebase.auth().currentUser)
 
     return (
         <View style={styles.container}>
-            <View>
-                <Text style={styles.text}>Hello {userName}</Text>
+            <TouchableOpacity onPress={nextPage}>
+            <View style={styles.continueButton}>
+                <Text style={styles.text}>Continue as: {userName}</Text>
+            </View>
+            </TouchableOpacity>
+            <View style={globalStyle.globalTopDistance}/>
+            <View style={styles.modal}>
+            <NewNameModal/>
             </View>
             <Logout/>
         </View>
@@ -41,7 +52,17 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+    modal: {
+
+    },
     text: {
         fontSize: globalStyle.textFontSize,
-    }
+    },
+    continueButton: {
+        borderRadius: globalStyle.buttonBorderRadius,
+        borderStyle: "solid",
+        borderWidth: globalStyle.standardBorderWidth,
+        borderColor: globalStyle.mainColorGreen,
+        padding: globalStyle.elementPadding,
+    },
 })
