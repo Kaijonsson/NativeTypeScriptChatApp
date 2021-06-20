@@ -9,14 +9,10 @@ import { useNavigation } from '@react-navigation/core'
 
 import {Props} from "../types/types"
 
-import "firebase/auth"
-import firebase from "firebase"
-
 const ChooseUsername = ({route}: Props) => {
 
     const navigation = useNavigation()
 
-    console.log("ROUTE: ", route)
 
     const userName = route.params.user.name
     const activeUser = route.params.user
@@ -24,8 +20,6 @@ const ChooseUsername = ({route}: Props) => {
     const nextPage = () => {
         navigation.navigate("ChatScreen", {activeUser})
     }
-
-    console.log("CURRENTUSER: ", firebase.auth().currentUser)
 
     return (
         <View style={styles.container}>

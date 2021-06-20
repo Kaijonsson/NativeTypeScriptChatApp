@@ -31,36 +31,25 @@ const LoginRegScreen = () => {
               if (result.type  === 'success') {
                 const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken, result.accessToken);
                 firebase.auth().signInWithCredential(credential).then(()=> {
-                  console.log("CURRENTUSER: ", firebase.auth().currentUser)
-                  const userId = result.user.id!
-                  firebase.database().ref().child(userId).get().then((snapshot)=> {
+                  firebase.database().ref("users").child(result.user.id!).get().then((snapshot)=> {
                     if(snapshot.exists()){
-                      console.log("snapshot exists")
                       navigation.navigate("ChooseUserNameScreen", {user : result.user})
                     }else {
-                      firebase.database().ref('users/' + result.user.id).set({
+                      firebase.database().ref("users/" + result.user.id).set({
                         username: result.user.name,
                         email: result.user.email,
-                        id: result.user.id,
+                        id: result.user.id
                       }).then(()=> {
                         navigation.navigate("ChooseUserNameScreen", {user : result.user})
-                      });
+                      })
                     }
                   })
-                });
-
-                
-                
-
-                
+                });    
               }
             } catch ({ message }) {
               alert('login: Error:' + message);
             }
           }
-
-          
-
         
     return (
         <View  style={styles.container}>
