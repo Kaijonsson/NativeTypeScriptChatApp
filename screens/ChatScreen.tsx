@@ -1,34 +1,30 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, View, TextInput, Text, TouchableOpacity } from 'react-native'
 import globalStyle from '../css/globalStyle'
 
 import Logout from '../components/Logout'
+import YourMessages from '../components/chatScreen/YourMessages'
+import RecievedMessages from '../components/chatScreen/RecievedMessages'
+import SendText from '../components/chatScreen/SendText'
 
 import {Props} from "../types/types"
 
-
 const ChatScreen = ({route}: Props) => {
 
-    console.log("chatRoute: ", route)
+    const userObject = route.params.user
 
     const [input, setUserInput] = useState(String)
-
-    const sendText = () => {
-
-    }
 
     return (
         <View style={styles.container}>
             <Logout/>
             <View style={styles.chatWindow}>
+                 <YourMessages userCredentials={userObject}/>
+                <View><RecievedMessages/></View> 
             </View>
             <View style={styles.chatAndButton}>
                 <TextInput onChangeText={setUserInput} value={input} style={styles.textInput} placeholder="Chat..."/>
-                <TouchableOpacity>
-                <View style={styles.button}>
-                    <Text style={styles.text}>Send</Text>
-                </View>
-                </TouchableOpacity>
+                <SendText message={input} userCredentials={userObject} />
             </View>
         </View>
     )
@@ -53,10 +49,7 @@ const styles = StyleSheet.create({
         color: "black",
         borderRadius: globalStyle.buttonBorderRadius,
         flexGrow: 1,
-    },
-    text: {
-        fontSize: globalStyle.textFontSize,
-
+        backgroundColor: "white",
     },
     chatWindow: {
         backgroundColor: "white",
@@ -73,12 +66,5 @@ const styles = StyleSheet.create({
         minWidth: "95%",
         
     },
-    button: {
-        borderRadius: globalStyle.buttonBorderRadius,
-        borderColor: globalStyle.mainColorGreen,
-        borderStyle: "solid",
-        borderWidth: globalStyle.standardBorderWidth,
-        padding: globalStyle.elementPadding,
 
-    }
 })

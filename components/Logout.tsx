@@ -9,7 +9,6 @@ import { useNavigation } from '@react-navigation/native';
 
 const Logout = () => {
 
-    const [user, setUser]= useState(false)
 
     const navigation = useNavigation()
 
@@ -22,20 +21,8 @@ const Logout = () => {
           });
       }
 
-    firebase.auth().onAuthStateChanged((user)=> {
-        if(!user){
-            setUser(false)
-            console.log("user is signed out")
-        }else {
-            setUser(true)
-            console.log("user is signed in")
-        }
-    })
-    if(user === true){
+   
         return <Button onPress={SignOut} title="Sign Out"/>
-    }else {
-        return null
-    }
 
 }
 

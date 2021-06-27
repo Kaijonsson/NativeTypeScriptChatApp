@@ -14,11 +14,12 @@ const ChooseUsername = ({route}: Props) => {
     const navigation = useNavigation()
 
 
+
     const userName = route.params.user.name
     const activeUser = route.params.user
 
     const nextPage = () => {
-        navigation.navigate("ChatScreen", {activeUser})
+        navigation.navigate("ChatScreen", {user: activeUser})
     }
 
     return (

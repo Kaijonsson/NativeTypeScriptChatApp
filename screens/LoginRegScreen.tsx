@@ -15,7 +15,6 @@ const LoginRegScreen = () => {
 
     const navigation = useNavigation()
 
-
     
         const iOSExpoClient = "501073455568-3snsp90qkej1rbumi601guo6ojev9139.apps.googleusercontent.com"
         const androidExpoClient = "501073455568-cq3fri9n42n6n82sh2mel4q85d7lcnqr.apps.googleusercontent.com"
@@ -38,7 +37,7 @@ const LoginRegScreen = () => {
                       firebase.database().ref("users/" + result.user.id).set({
                         username: result.user.name,
                         email: result.user.email,
-                        id: result.user.id
+                        id: result.user.id,
                       }).then(()=> {
                         navigation.navigate("ChooseUserNameScreen", {user : result.user})
                       })
