@@ -3,44 +3,57 @@ import { StyleSheet, FlatList, View, Text } from 'react-native'
 
 import firebase from 'firebase'
 import "firebase/database"
+import { useEffect } from 'react'
+import globalStyle from '../../css/globalStyle'
 
 interface userObjectProp {
-    userCredentials: credentialsObject,
+    userCredentials: {
+        id: string,
+        name: string,
+    },
 }
-
-interface credentialsObject {
-    id: string,
-  }
-  
 
 const YourMessages = ({userCredentials}: userObjectProp) => {
 
-    const [messages, setMessages] = useState(Array)
+    const [input, setInput] = useState(Array)
 
-    // console.log("cred: ", userCredentials)
-
-    firebase.database().ref("users/" + userCredentials.id + "/posts").on("value", (snapshot)=> {
-        snapshot.forEach((childSnapshot)=> {
-            console.log(childSnapshot.child("message").val())
-            // setMessages(messages=>[...messages, childSnapshot.child("message").val()])
+    console.log("cred: ", userCredentials)
+    useEffect(()=> {
+        firebase.database().ref("users/" + userCredentials.id + "/posts").on("child_added", (snapshot)=> {
+            // console.log("name: ", userCredentials.name)
+            // console.log("message: ", snapshot.child("message"))
+            snapshot.forEach((childSnapshot)=> {
+                console.log("child val: ", childSnapshot.val())
+               setInput([...input, childSnapshot.val()])
+            } )
         })
-    })
+    }, [input])
 
-    // console.log("messages: ", messages)
+    console.log(input)
 
-    // const renderItem = ([item]: any)=> {
-    //     return (
-    //         <Text>{item}</Text>
-    //     )
-    // }
+    const renderItem = ({item}: any)=> {
+        return (
+            <View key={item.message}>
+                <Text style={styles.text}>{userCredentials.name}</Text>
+                <Text style={styles.text}>{item.message}{console.log("text: ", item.message)}</Text>
+            </View>
+            )
+    }
 
     return (
         <View>
-            {/* <FlatList data={messages} renderItem={renderItem} extraData={messages}/> */}
+            <Text style={styles.text}>Hej</Text>
+            <FlatList data={input} renderItem={renderItem} extraData={input}/>
         </View>
     )
 }
 
 export default YourMessages
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    text: {
+        color: "black",
+        fontSize: globalStyle.textFontSize,
+
+    }
+})

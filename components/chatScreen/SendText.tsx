@@ -7,18 +7,16 @@ import firebase from "firebase"
 import "firebase/database"
 
 interface userMessageProp {
-  userCredentials: credentialsObject;
+  userCredentials: {
+    id: string,
+  };
   message: String;
-}
-
-interface credentialsObject {
-  id: string,
 }
 
 const SendText = ({ message, userCredentials }: userMessageProp) => {
   
   const sendMessage = ()=> {
-    if(message === ""){
+    if(message === null){
       console.log("no message")
     }else {
 

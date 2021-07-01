@@ -10,14 +10,14 @@ import * as GoogleAuth from 'expo-google-app-auth';
 
 import {useNavigation} from "@react-navigation/native"
 
-
 const LoginRegScreen = () => {
 
     const navigation = useNavigation()
 
     
-        const iOSExpoClient = "501073455568-3snsp90qkej1rbumi601guo6ojev9139.apps.googleusercontent.com"
-        const androidExpoClient = "501073455568-cq3fri9n42n6n82sh2mel4q85d7lcnqr.apps.googleusercontent.com"
+    
+    const iOSExpoClient = "501073455568-3snsp90qkej1rbumi601guo6ojev9139.apps.googleusercontent.com"
+    const androidExpoClient = "501073455568-cq3fri9n42n6n82sh2mel4q85d7lcnqr.apps.googleusercontent.com"
 
         const signInWithGoogle = async () => {
             try {
