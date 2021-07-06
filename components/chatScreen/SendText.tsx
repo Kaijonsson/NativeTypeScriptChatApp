@@ -16,7 +16,7 @@ interface userMessageProp {
 const SendText = ({ message, userCredentials }: userMessageProp) => {
   
   const sendMessage = ()=> {
-    if(message === null){
+    if(message === ""){
       console.log("no message")
     }else {
 
@@ -33,7 +33,6 @@ const SendText = ({ message, userCredentials }: userMessageProp) => {
 
   return (
     <TouchableOpacity onPress={sendMessage}>
-
       <View style={styles.button}>
         <Text style={styles.text}>Send</Text>
       </View>

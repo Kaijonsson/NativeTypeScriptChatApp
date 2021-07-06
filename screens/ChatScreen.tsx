@@ -12,7 +12,6 @@ import {Props} from "../types/types"
 const ChatScreen = ({route}: Props) => {
 
     const userObject = route.params.user
-    console.log(userObject)
 
     const [input, setUserInput] = useState(String)
 
@@ -24,7 +23,7 @@ const ChatScreen = ({route}: Props) => {
                 <View><RecievedMessages/></View> 
             </View>
             <View style={styles.chatAndButton}>
-                <TextInput clearTextOnFocus={true} onChangeText={setUserInput} value={input} style={styles.textInput} placeholder="Chat..."/>
+                <TextInput onChangeText={setUserInput} value={input} style={styles.textInput} placeholder="Chat..."/>
                 <SendText message={input} userCredentials={userObject} />
             </View>
         </View>
@@ -40,6 +39,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: globalStyle.mainBackgroundColor,
         paddingBottom: 20,
+        paddingTop: 20,
     },
     textInput: {
         fontSize: globalStyle.textFontSize,
@@ -65,6 +65,8 @@ const styles = StyleSheet.create({
     chatAndButton: {
         flexDirection: "row",
         minWidth: "95%",
+        zIndex: 1,
+        position: "relative",
         
     },
 

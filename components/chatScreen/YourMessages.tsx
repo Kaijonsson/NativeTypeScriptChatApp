@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { StyleSheet, FlatList, View, Text } from 'react-native'
+import { StyleSheet, FlatList, View, Text, ListRenderItem } from 'react-native'
 
 import firebase from 'firebase'
 import "firebase/database"
@@ -13,37 +13,51 @@ interface userObjectProp {
     },
 }
 
+interface flatlistItem {
+        message: string,
+        id: string,
+        timeStamp: string,
+}
+
 const YourMessages = ({userCredentials}: userObjectProp) => {
 
-    const [input, setInput] = useState(Array)
+    const [input, setInput] = useState([{}])
 
     console.log("cred: ", userCredentials)
     useEffect(()=> {
         firebase.database().ref("users/" + userCredentials.id + "/posts").on("child_added", (snapshot)=> {
-            // console.log("name: ", userCredentials.name)
-            // console.log("message: ", snapshot.child("message"))
-            snapshot.forEach((childSnapshot)=> {
-                console.log("child val: ", childSnapshot.val())
-               setInput([...input, childSnapshot.val()])
-            } )
+            setInput(input => [...input, snapshot])
         })
-    }, [input])
+    }, [])
 
-    console.log(input)
-
-    const renderItem = ({item}: any)=> {
+    const itemSeparator = () => {
         return (
-            <View key={item.message}>
+          <View
+            style={{
+              height: 2,
+            }}
+          />
+        );
+      };
+
+    const renderItem: ListRenderItem<flatlistItem> = ({item})=> {
+        console.log("item: ", item)
+        console.log("item.message: ", item.message)
+        return (
+            <View style={styles.flatlist}>
                 <Text style={styles.text}>{userCredentials.name}</Text>
-                <Text style={styles.text}>{item.message}{console.log("text: ", item.message)}</Text>
+                <Text style={styles.text}>{item.message}</Text>
             </View>
             )
     }
 
+    [{}]
+
     return (
         <View>
             <Text style={styles.text}>Hej</Text>
-            <FlatList data={input} renderItem={renderItem} extraData={input}/>
+            <FlatList data={input} renderItem={renderItem} extraData={input} ItemSeparatorComponent={itemSeparator} keyExtractor={(item, index) => index.toString()}
+/>
         </View>
     )
 }
@@ -54,6 +68,8 @@ const styles = StyleSheet.create({
     text: {
         color: "black",
         fontSize: globalStyle.textFontSize,
-
+    },
+    flatlist: {
+        backgroundColor: "gray",
     }
 })

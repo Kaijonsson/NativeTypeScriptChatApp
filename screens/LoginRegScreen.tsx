@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
+
+import Loading from '../components/Loading';
 
 import globalStyle from "../css/globalStyle"
 
@@ -14,11 +16,14 @@ const LoginRegScreen = () => {
 
     const navigation = useNavigation()
 
-    
+    const [loading, setLoading] = useState(false)
     
     const iOSExpoClient = "501073455568-3snsp90qkej1rbumi601guo6ojev9139.apps.googleusercontent.com"
     const androidExpoClient = "501073455568-cq3fri9n42n6n82sh2mel4q85d7lcnqr.apps.googleusercontent.com"
 
+    if(loading){
+      return <Loading/> 
+    }
         const signInWithGoogle = async () => {
             try {
               const result = await GoogleAuth.logInAsync({
@@ -32,20 +37,25 @@ const LoginRegScreen = () => {
                 firebase.auth().signInWithCredential(credential).then(()=> {
                   firebase.database().ref("users").child(result.user.id!).get().then((snapshot)=> {
                     if(snapshot.exists()){
+                      setLoading(true)
                       navigation.navigate("ChooseUserNameScreen", {user : result.user})
+                      setLoading(false)
                     }else {
+                      setLoading(true)
                       firebase.database().ref("users/" + result.user.id).set({
                         username: result.user.name,
                         email: result.user.email,
                         id: result.user.id,
                       }).then(()=> {
                         navigation.navigate("ChooseUserNameScreen", {user : result.user})
+                        setLoading(false) 
                       })
                     }
                   })
-                });    
+                });  
               }
             } catch ({ message }) {
+              setLoading(false)
               alert('login: Error:' + message);
             }
           }
