@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, memo} from 'react'
 import { StyleSheet, FlatList, View, Text, ListRenderItem } from 'react-native'
 
 import firebase from 'firebase'
@@ -37,13 +37,16 @@ const YourMessages = ({userCredentials}: userObjectProp) => {
     return (
         <View>
             <FlatList data={input} renderItem={({item})=> {
+                console.log("input: ", input)
                 return (
+                    <View>
+                        <Text style={styles.text}>{userCredentials.name}:</Text>
                    <View style={styles.flatlist}>
-                        <Text style={styles.text}>{userCredentials.name}</Text>
                         <Text style={styles.text}>{item}</Text>
                     </View> 
+                    </View>
                 )
-            }} extraData={input} ItemSeparatorComponent={itemSeparator} keyExtractor={(item, index) => index.toString()}
+            }} extraData={input} ItemSeparatorComponent={itemSeparator} keyExtractor={(_, index) => index.toString()}
 />
         </View>
     )
