@@ -5,6 +5,7 @@ import firebase from 'firebase'
 import "firebase/database"
 import { useEffect } from 'react'
 import globalStyle from '../../css/globalStyle'
+import List from './List'
 
 interface userObjectProp {
     userCredentials: {
@@ -13,14 +14,22 @@ interface userObjectProp {
     },
 }
 
+interface snap {
+    id: string,
+    message: string,
+}
+
+
+
 const YourMessages = ({userCredentials}: userObjectProp) => {
 
-    const [input, setInput] = useState<String[]>([])
+
+    const [input, setInput] = useState<Array<snap>>([])
 
     useEffect(()=> {
         firebase.database().ref("users/" + userCredentials.id + "/posts").on("child_added", (snapshot)=> {
-            console.log("child.val: ", snapshot.child("message").val())
-            setInput(input => [...input, snapshot.child("message").val()])
+            console.log("child: ", snapshot)
+            setInput(input => [...input, {id: snapshot.child("id").val(), message: snapshot.child("message").val()}])
         })
     }, [])
 
@@ -37,16 +46,13 @@ const YourMessages = ({userCredentials}: userObjectProp) => {
     return (
         <View>
             <FlatList data={input} renderItem={({item})=> {
-                console.log("input: ", input)
                 return (
-                    <View>
+                    <View key={item.id}>
                         <Text style={styles.text}>{userCredentials.name}:</Text>
-                   <View style={styles.flatlist}>
-                        <Text style={styles.text}>{item}</Text>
-                    </View> 
+                        <List item={item}/>
                     </View>
                 )
-            }} extraData={input} ItemSeparatorComponent={itemSeparator} keyExtractor={(_, index) => index.toString()}
+            }} extraData={input} ItemSeparatorComponent={itemSeparator}
 />
         </View>
     )
@@ -58,9 +64,5 @@ const styles = StyleSheet.create({
     text: {
         fontSize: globalStyle.textFontSize,
     },
-    flatlist: {
-        backgroundColor: globalStyle.mainColorGreen,
-        minWidth: 0,
-
-    }
+    
 })
