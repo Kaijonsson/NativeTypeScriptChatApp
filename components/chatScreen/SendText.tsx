@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, {useState} from "react";
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
 
 import globalStyle from "../../css/globalStyle"
 
@@ -10,29 +10,35 @@ interface userMessageProp {
   userCredentials: {
     name: string,
   };
-  message: String;
 }
 
-const SendText = ({ message, userCredentials }: userMessageProp) => {
-  
+const SendText = ({userCredentials }: userMessageProp) => {
+
+  const [input, setInput] = useState(String)
+
+
   const sendMessage = ()=> {
-    if(message === ""){
+    setInput("")
+    if(input === ""){
       console.log("no message")
     }else {
       
       firebase.database().ref("users/" + "/posts/").push({
         name: userCredentials.name,
-        message: message,
+        message: input,
       })
     }
   }
 
   return (
+    <View style={styles.chatAndButton}>
+    <TextInput onChangeText={setInput} value={input} style={styles.textInput} placeholder="Chat..."/>
     <TouchableOpacity onPress={sendMessage}>
       <View style={styles.button}>
         <Text style={styles.text}>Send</Text>
       </View>
     </TouchableOpacity>
+</View>
   );
 };
 
@@ -49,6 +55,22 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderWidth: globalStyle.standardBorderWidth,
     padding: globalStyle.elementPadding,
-
+},
+chatAndButton: {
+  flexDirection: "row",
+  minWidth: "95%",
+  zIndex: 1,
+  position: "relative",
+},
+textInput: {
+    fontSize: globalStyle.textFontSize,
+    borderColor: globalStyle.mainColorGreen,
+    borderStyle: "solid",
+    borderWidth: globalStyle.standardBorderWidth,
+    padding: globalStyle.elementPadding,
+    color: "black",
+    borderRadius: globalStyle.buttonBorderRadius,
+    flexGrow: 1,
+    backgroundColor: "white",
 },
 });
