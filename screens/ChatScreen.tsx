@@ -10,7 +10,6 @@ import {Props} from "../types/types"
 
 const ChatScreen = ({route}: Props) => {
     const userObject = route.params.user
-    console.log("userObject: ", userObject)
 
 
     return (

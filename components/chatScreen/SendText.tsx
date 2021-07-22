@@ -6,6 +6,9 @@ import globalStyle from "../../css/globalStyle"
 import firebase from "firebase"
 import "firebase/database"
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+
 interface userMessageProp {
   userCredentials: {
     name: string,
@@ -31,6 +34,8 @@ const SendText = ({userCredentials }: userMessageProp) => {
   }
 
   return (
+    <KeyboardAwareScrollView>
+
     <View style={styles.chatAndButton}>
     <TextInput onChangeText={setInput} value={input} style={styles.textInput} placeholder="Chat..."/>
     <TouchableOpacity onPress={sendMessage}>
@@ -39,6 +44,7 @@ const SendText = ({userCredentials }: userMessageProp) => {
       </View>
     </TouchableOpacity>
 </View>
+    </KeyboardAwareScrollView>
   );
 };
 
