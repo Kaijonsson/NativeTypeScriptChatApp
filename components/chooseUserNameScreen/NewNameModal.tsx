@@ -7,6 +7,8 @@ const NewNameModal = () => {
 
     const [modalVisible, setModalVisible] = useState(false)
 
+    const [userInput, setUserInput] = useState("")
+
     const ModalHideOrShow = () => {
 
         if(modalVisible){
@@ -29,9 +31,14 @@ const NewNameModal = () => {
           setModalVisible(!modalVisible);
         }}
       >
-        <View style={styles.centeredView}>
+        <View style={styles.centeredViewPoppedUp}>
           <View style={styles.modalView}>
-              <TextInput style={styles.textStyle}/>
+            <View style={styles.textInputContainer}>
+              <TextInput value={userInput} onChangeText={setUserInput} placeholder="Enter username" style={styles.textStyle}/>
+              <TouchableOpacity>
+                <Text>Save Changes</Text>
+              </TouchableOpacity>
+            </View>
             <TouchableOpacity
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
@@ -61,20 +68,36 @@ const styles = StyleSheet.create({
 
     },
     button: {
-
+    },
+    textInputContainer: {
+      flexDirection: "row",
+      alignContent: "space-around",
     },
     centeredView: {
-        borderRadius: globalStyle.buttonBorderRadius,
-        borderStyle: "solid",
-        borderWidth: globalStyle.standardBorderWidth,
-        borderColor: globalStyle.mainColorGreen,
-        padding: globalStyle.elementPadding,
-        justifyContent: "center",
-        alignItems: "center",
-
+      borderRadius: globalStyle.buttonBorderRadius,
+      borderStyle: "solid",
+      borderWidth: globalStyle.standardBorderWidth,
+      borderColor: globalStyle.mainColorGreen,
+      padding: globalStyle.elementPadding,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    centeredViewPoppedUp: {
+      borderRadius: globalStyle.buttonBorderRadius,
+      borderStyle: "solid",
+      borderWidth: globalStyle.standardBorderWidth,
+      borderColor: globalStyle.mainColorGreen,
+      padding: globalStyle.elementPadding,
+      justifyContent: "center",
+      alignItems: "center",
+      position: "absolute",
+      alignSelf: "center",
+      top: "10%",
+      width: "35%",
     },
     textStyle: {
         fontSize: globalStyle.textFontSize,
+        color: "#007AFF",
     },
     modalView: {
 

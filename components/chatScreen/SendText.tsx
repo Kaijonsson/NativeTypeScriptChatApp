@@ -8,7 +8,7 @@ import "firebase/database"
 
 interface userMessageProp {
   userCredentials: {
-    id: string,
+    name: string,
   };
   message: String;
 }
@@ -19,13 +19,9 @@ const SendText = ({ message, userCredentials }: userMessageProp) => {
     if(message === ""){
       console.log("no message")
     }else {
-
-      const date = new Date();
-      const timeStamp = date.toString().slice(0, 25);
       
-      firebase.database().ref("users/" + userCredentials.id + "/posts/" + timeStamp.trim()).set({
-        timeStamp: timeStamp,
-        id: timeStamp,
+      firebase.database().ref("users/" + "/posts/").push({
+        name: userCredentials.name,
         message: message,
       })
     }

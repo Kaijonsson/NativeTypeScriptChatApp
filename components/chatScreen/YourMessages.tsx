@@ -7,29 +7,31 @@ import { useEffect } from 'react'
 import globalStyle from '../../css/globalStyle'
 import List from './List'
 
-interface userObjectProp {
-    userCredentials: {
-        id: string,
-        name: string,
-    },
-}
+
 
 interface snap {
     id: string,
     message: string,
+    name: string | undefined,
+}
+
+interface userObject {
+    user: {
+        name: string,
+    }
 }
 
 
 
-const YourMessages = ({userCredentials}: userObjectProp) => {
-
+const YourMessages = ({user}: userObject) => {
 
     const [input, setInput] = useState<Array<snap>>([])
 
     useEffect(()=> {
-        firebase.database().ref("users/" + userCredentials.id + "/posts").on("child_added", (snapshot)=> {
-            console.log("child: ", snapshot)
-            setInput(input => [...input, {id: snapshot.child("id").val(), message: snapshot.child("message").val()}])
+        firebase.database().ref("users/posts").on("child_added", (snapshot)=> {
+            if(snapshot.exists())
+            console.log("snapshot: ", snapshot)
+            setInput(input => [...input, {id: snapshot.val().id, message: snapshot.val().message, name: snapshot.val().name}])
         })
     }, [])
 
@@ -37,22 +39,21 @@ const YourMessages = ({userCredentials}: userObjectProp) => {
         return (
           <View
             style={{
-              height: 2,
+              height: globalStyle.elementPadding,
             }}
           />
         );
       };
 
     return (
-        <View>
+        <View style={styles.listContainer}>
             <FlatList data={input} renderItem={({item})=> {
                 return (
-                    <View key={item.id}>
-                        <Text style={styles.text}>{userCredentials.name}:</Text>
-                        <List item={item}/>
+                    <View>
+                        <List item={item} user={user}/>
                     </View>
                 )
-            }} extraData={input} ItemSeparatorComponent={itemSeparator}
+            }} extraData={input} ItemSeparatorComponent={itemSeparator} keyExtractor={(item, index) => index.toString()} 
 />
         </View>
     )
@@ -61,8 +62,8 @@ const YourMessages = ({userCredentials}: userObjectProp) => {
 export default YourMessages
 
 const styles = StyleSheet.create({
-    text: {
-        fontSize: globalStyle.textFontSize,
-    },
+    listContainer: {
+        width: "100%",
+    }
     
 })

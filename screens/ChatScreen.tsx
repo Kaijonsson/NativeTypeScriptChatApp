@@ -4,7 +4,6 @@ import globalStyle from '../css/globalStyle'
 
 import Logout from '../components/Logout'
 import YourMessages from '../components/chatScreen/YourMessages'
-import RecievedMessages from '../components/chatScreen/RecievedMessages'
 import SendText from '../components/chatScreen/SendText'
 
 import {Props} from "../types/types"
@@ -12,6 +11,7 @@ import {Props} from "../types/types"
 const ChatScreen = ({route}: Props) => {
 
     const userObject = route.params.user
+    console.log("userObject: ", userObject)
 
     const [input, setUserInput] = useState(String)
 
@@ -19,8 +19,7 @@ const ChatScreen = ({route}: Props) => {
         <View style={styles.container}>
             <Logout/>
             <View style={styles.chatWindow}>
-                 <YourMessages userCredentials={userObject}/>
-                <View><RecievedMessages/></View> 
+                     <YourMessages user={userObject}/>
             </View>
             <View style={styles.chatAndButton}>
                 <TextInput onChangeText={setUserInput} value={input} style={styles.textInput} placeholder="Chat..."/>
@@ -60,7 +59,8 @@ const styles = StyleSheet.create({
         borderRadius: globalStyle.buttonBorderRadius,
         borderColor: globalStyle.mainColorGreen,
         borderStyle: "solid",
-        borderWidth: globalStyle.standardBorderWidth
+        borderWidth: globalStyle.standardBorderWidth,
+        flexDirection: "row",
     },
     chatAndButton: {
         flexDirection: "row",
