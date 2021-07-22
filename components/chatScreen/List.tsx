@@ -6,18 +6,20 @@ import globalStyle from "../../css/globalStyle"
 interface item {
     item: {
         message: string,
-        name: string | undefined,
+        name: string,
+        id: string,
     }
     user: {
         name: string,
+        id: string
     },
 }
 
 const List = ({item, user}: item) => {
 
-    const activeUser = user.name
+    const activeUserId = user.id
 
-    if (activeUser === item.name){
+    if (activeUserId === item.id){
         return (
             <View style={styles.listContainerForUser}>
                 <Text>{item.name}</Text>

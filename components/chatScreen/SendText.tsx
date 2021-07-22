@@ -12,6 +12,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 interface userMessageProp {
   userCredentials: {
     name: string,
+    id: string,
   };
 }
 
@@ -29,6 +30,7 @@ const SendText = ({userCredentials }: userMessageProp) => {
       firebase.database().ref("users/" + "/posts/").push({
         name: userCredentials.name,
         message: input,
+        id: userCredentials.id,
       })
     }
   }
