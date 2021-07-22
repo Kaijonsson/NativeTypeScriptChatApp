@@ -35,15 +35,14 @@ const LoginRegScreen = () => {
               if (result.type  === 'success') {
                 const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken, result.accessToken);
                 firebase.auth().signInWithCredential(credential).then(()=> {
+                  setLoading(true)
                   firebase.database().ref("users").get().then((snapshot)=> {
                     if(snapshot.exists()){
-                      setLoading(true)
                       navigation.navigate("ChooseUserNameScreen", {user : result.user})
                       setLoading(false)
                     }else {
-                      setLoading(true)
                         navigation.navigate("ChooseUserNameScreen", {user : result.user})
-                        setLoading(false) 
+                        setLoading(false)
                     }
                   })
                 });  

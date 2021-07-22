@@ -1,5 +1,5 @@
-import React, {useState, memo} from 'react'
-import { StyleSheet, FlatList, View, Text, ListRenderItem } from 'react-native'
+import React, {useState} from 'react'
+import { StyleSheet, FlatList, View } from 'react-native'
 
 import firebase from 'firebase'
 import "firebase/database"
@@ -12,12 +12,13 @@ import List from './List'
 interface snap {
     id: string,
     message: string,
-    name: string | undefined,
+    name: string,
 }
 
 interface userObject {
     user: {
         name: string,
+        id: string,
     }
 }
 
