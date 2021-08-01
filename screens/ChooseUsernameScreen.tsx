@@ -1,18 +1,17 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native'
 import globalStyle from "../css/globalStyle"
 
 import Logout from "../components/Logout"
-import NewNameModal from '../components/chooseUserNameScreen/NewNameModal'
 
 import { useNavigation } from '@react-navigation/core'
 
 import {Props} from "../types/types"
+import NewChoice from '../components/chooseUserNameScreen/NewChoice'
 
 const ChooseUsername = ({route}: Props) => {
 
     const navigation = useNavigation()
-
 
 
     const userName = route.params.user.name
@@ -24,16 +23,18 @@ const ChooseUsername = ({route}: Props) => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={nextPage}>
-            <View style={styles.continueButton}>
-                <Text style={styles.text}>Continue as: {userName}</Text>
-            </View>
-            </TouchableOpacity>
-            <View style={globalStyle.globalTopDistance}/>
-            <View style={styles.modal}>
-            <NewNameModal/>
+            <View style={styles.userNameSubContainer}>
+                <TouchableOpacity onPress={nextPage}>
+                <View style={styles.continueButton}>
+                    <Text style={styles.text}>Continue as: {userName}</Text>
+                </View>
+                </TouchableOpacity>
+                <View>
+                    <NewChoice user={activeUser}/>
+                </View>
             </View>
             <Logout/>
+            <View style={styles.bottomDistance}/>
         </View>
     )
 }
@@ -44,11 +45,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: globalStyle.mainBackgroundColor,
-        justifyContent: "center",
+        justifyContent: "space-around",
         alignItems: "center",
     },
-    modal: {
-
+    userNameSubContainer: {
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        flexGrow: 1,
     },
     text: {
         fontSize: globalStyle.textFontSize,
@@ -60,4 +63,17 @@ const styles = StyleSheet.create({
         borderColor: globalStyle.mainColorGreen,
         padding: globalStyle.elementPadding,
     },
+    textInput: {
+        fontSize: globalStyle.textFontSize,
+        borderColor: globalStyle.mainColorGreen,
+        borderStyle: "solid",
+        borderWidth: globalStyle.standardBorderWidth,
+        padding: globalStyle.elementPadding,
+        color: "black",
+        borderRadius: globalStyle.buttonBorderRadius,
+        backgroundColor: "white",
+    },
+    bottomDistance: {
+        paddingBottom: 20,
+    }
 })
