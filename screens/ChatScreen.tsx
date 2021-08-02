@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: globalStyle.mainBackgroundColor,
         paddingBottom: 20,
         paddingTop: 20,
+        marginHorizontal: 20,
     },
     chatWindow: {
         backgroundColor: "white",
