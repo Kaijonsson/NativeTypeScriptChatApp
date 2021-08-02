@@ -23,7 +23,8 @@ const Navigation = () => {
         <NavigationContainer>
         <RootStack.Navigator initialRouteName="LoginRegScreen" screenOptions={{
           headerShown: false,
-          cardStyle: {backgroundColor: globalStyle.mainBackgroundColor}}} >
+          cardStyle: {backgroundColor: globalStyle.mainBackgroundColor}
+        }}>
           <RootStack.Screen options={globalStyle.headerOptions} name="LoginRegScreen" component={LoginRegScreen}/>
           <RootStack.Screen options={globalStyle.headerOptions} name="ChooseUserNameScreen" component={ChooseUserNameScreen}/>
           <RootStack.Screen options={globalStyle.headerOptions} name="ChatScreen" component={ChatScreen}/>
