@@ -13,6 +13,12 @@ const Logout = () => {
     const navigation = useNavigation()
 
     const SignOut = () => {
+
+        const activeUser = firebase.auth().currentUser?.uid
+        console.log(activeUser)
+        console.log(firebase.database().ref("users/" + activeUser))
+        firebase.database().ref("users").child(activeUser!).remove()
+
         firebase.auth().signOut().then(() => {
             console.log("signed out")
             navigation.navigate("LoginRegScreen")

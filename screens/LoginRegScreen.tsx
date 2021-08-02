@@ -36,9 +36,10 @@ const LoginRegScreen = () => {
                 const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken, result.accessToken);
                 firebase.auth().signInWithCredential(credential).then(()=> {
                   setLoading(true)
-                      firebase.database().ref("users/" + result.user.id).set({
+                  const userId = firebase.auth().currentUser?.uid
+                      firebase.database().ref("users/" + userId).set({
                         user: result.user.name,
-                        id: result.user.id,
+                        id: result.user.id
                       })
                       navigation.navigate("ChooseUserNameScreen", {user : result.user})
                       setLoading(false)
