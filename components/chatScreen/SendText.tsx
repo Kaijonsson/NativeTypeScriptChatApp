@@ -27,7 +27,7 @@ const SendText = ({userCredentials }: userMessageProp) => {
       console.log("no message")
     }else {
       
-      firebase.database().ref("users/" + "/posts/").push({
+      firebase.database().ref("posts").push({
         name: userCredentials.name,
         message: input,
         id: userCredentials.id,

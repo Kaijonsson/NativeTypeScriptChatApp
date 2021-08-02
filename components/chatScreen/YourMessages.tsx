@@ -29,7 +29,7 @@ const YourMessages = ({user}: userObject) => {
     const [input, setInput] = useState<Array<snap>>([])
 
     useEffect(()=> {
-        firebase.database().ref("users/posts").on("child_added", (snapshot)=> {
+        firebase.database().ref("posts").on("child_added", (snapshot)=> {
             if(snapshot.exists()) {
                 setInput(input => [...input, {id: snapshot.val().id, message: snapshot.val().message, name: snapshot.val().name}])
             }

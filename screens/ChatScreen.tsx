@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
 import globalStyle from '../css/globalStyle'
 
 import Logout from '../components/Logout'
@@ -7,12 +7,11 @@ import YourMessages from '../components/chatScreen/YourMessages'
 import SendText from '../components/chatScreen/SendText'
 
 import {Props} from "../types/types"
+import ActiveUserList from '../components/chatScreen/ActiveUserList'
 
 const ChatScreen = ({route}: Props) => {
 
     const userObject = route.params.user
-
- 
 
 
     return (
@@ -23,7 +22,9 @@ const ChatScreen = ({route}: Props) => {
                     <YourMessages user={userObject}/>
                     </View>
 
-                <View style={styles.activeUsers}></View>
+                <View style={styles.activeUsers}>
+                    <ActiveUserList/>
+                </View>
             </View>
                 <SendText userCredentials={userObject} />
             <Logout/>
