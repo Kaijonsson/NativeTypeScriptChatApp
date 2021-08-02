@@ -73,6 +73,6 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
     },
     bottomDistance: {
-        paddingBottom: 20,
+        paddingBottom: globalStyle.elementPadding,
     }
 })
