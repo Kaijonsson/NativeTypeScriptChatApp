@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import globalStyle from '../css/globalStyle'
 
 import Logout from '../components/Logout'
@@ -9,15 +9,24 @@ import SendText from '../components/chatScreen/SendText'
 import {Props} from "../types/types"
 
 const ChatScreen = ({route}: Props) => {
+    // const [users, setUsers] = useState(Array)
+
     const userObject = route.params.user
+
+    // useEffect(()=> {
+    //     setUsers(users => [...users, userObject.name])
+    // }, [users])
 
 
     return (
         <View style={styles.container}>
             <View style={styles.chatWindow}>
-                <YourMessages user={userObject}/>
-                <View style={styles.activeUsers}>
-                </View>
+            <View style={styles.listContainer}>
+
+                    <YourMessages user={userObject}/>
+                    </View>
+
+                <View style={styles.activeUsers}></View>
             </View>
                 <SendText userCredentials={userObject} />
             <Logout/>
@@ -48,8 +57,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     activeUsers: {
-        backgroundColor: "gray",
-
-    }
+        flexGrow: 1,
+        borderLeftColor: globalStyle.mainColorGreen,
+        borderLeftWidth: globalStyle.standardBorderWidth,
+    },
+    listContainer: {
+        paddingVertical: globalStyle.elementPadding,
+        flexGrow: 4,
+    },
 
 })
