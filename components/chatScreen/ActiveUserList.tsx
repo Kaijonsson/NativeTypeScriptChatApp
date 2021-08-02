@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, FlatList, Text, View, } from 'react-native'
 
 import firebase from 'firebase'
-import "firebase/database"
 
 interface DataBaseUser {
         id: string,

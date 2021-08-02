@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import { StyleSheet, Button } from 'react-native'
 
 import firebase from 'firebase';
-import "firebase/auth"
 
 import { useNavigation } from '@react-navigation/native';
 

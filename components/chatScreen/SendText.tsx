@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-nativ
 import globalStyle from "../../css/globalStyle"
 
 import firebase from "firebase"
-import "firebase/database"
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 

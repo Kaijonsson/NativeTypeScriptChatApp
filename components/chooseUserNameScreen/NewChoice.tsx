@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
 
 import { useNavigation } from '@react-navigation/core'
+import firebase from 'firebase'
 
 import globalStyle from "../../css/globalStyle"
 interface data {
@@ -13,10 +14,13 @@ interface data {
 
 const NewChoice = ({user}: data) => {
 
+    const userId = firebase.auth().currentUser?.uid
+
     const navigation = useNavigation()
     const [input, setInput] = useState("")
 
     const newUserName = ()=> {
+        firebase.database().ref("users/" + userId).update({user: input})
         user.name = input
         const activeUser = user
         navigation.navigate("ChatScreen", {user: activeUser})
