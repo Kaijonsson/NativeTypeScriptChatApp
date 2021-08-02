@@ -9,13 +9,10 @@ import SendText from '../components/chatScreen/SendText'
 import {Props} from "../types/types"
 
 const ChatScreen = ({route}: Props) => {
-    // const [users, setUsers] = useState(Array)
 
     const userObject = route.params.user
 
-    // useEffect(()=> {
-    //     setUsers(users => [...users, userObject.name])
-    // }, [users])
+ 
 
 
     return (

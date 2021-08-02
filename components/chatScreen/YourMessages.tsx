@@ -54,7 +54,7 @@ const YourMessages = ({user}: userObject) => {
                         <List item={item} user={user}/>
                     </View>
                 )
-            }} extraData={input} inverted={true} ItemSeparatorComponent={itemSeparator} keyExtractor={(item, index) => index.toString()} 
+            }} extraData={input} ItemSeparatorComponent={itemSeparator} keyExtractor={(item, index) => index.toString()} 
 />
     )
 }
