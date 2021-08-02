@@ -14,11 +14,11 @@ const ChatScreen = ({route}: Props) => {
 
     return (
         <View style={styles.container}>
-            <Logout/>
             <View style={styles.chatWindow}>
                 <YourMessages user={userObject}/>
             </View>
                 <SendText userCredentials={userObject} />
+            <Logout/>
         </View>
     )
 }
