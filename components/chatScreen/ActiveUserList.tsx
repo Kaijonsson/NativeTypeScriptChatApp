@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, FlatList, Text, View } from 'react-native'
+import { StyleSheet, FlatList, Text, View, } from 'react-native'
 
 import firebase from 'firebase'
 import "firebase/database"
@@ -16,12 +16,14 @@ const ActiveUserList = () => {
 
     useEffect(()=> {
         firebase.database().ref("users").on("child_added", (snapshot)=> {
-            console.log(snapshot.val())
             if(snapshot.exists())
             setActiveUsers(activeUsers => [...activeUsers, {id: snapshot.val().id, user: snapshot.val().user}])
         })
     }, [])
-
+    
+    firebase.database().ref("users").on("child_removed", (oldChildSnapshot)=> {
+        setActiveUsers(activeUsers.filter(item => item.id !== oldChildSnapshot.val().id))
+    })
     return (
         <FlatList data={activeUsers} extraData={activeUsers} renderItem={({item})=> {
             return (
