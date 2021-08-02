@@ -16,6 +16,8 @@ const ChatScreen = ({route}: Props) => {
         <View style={styles.container}>
             <View style={styles.chatWindow}>
                 <YourMessages user={userObject}/>
+                <View style={styles.activeUsers}>
+                </View>
             </View>
                 <SendText userCredentials={userObject} />
             <Logout/>
@@ -30,21 +32,24 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: globalStyle.mainBackgroundColor,
-        paddingBottom: 20,
-        paddingTop: 20,
+        paddingBottom: globalStyle.elementPadding,
+        paddingTop: globalStyle.elementPadding,
+        marginHorizontal: globalStyle.elementPadding,
     },
     chatWindow: {
         backgroundColor: "white",
         flex: 2,
         minWidth: "95%",
-        marginBottom: 20,
+        marginBottom: globalStyle.elementPadding,
         borderRadius: globalStyle.buttonBorderRadius,
         borderColor: globalStyle.mainColorGreen,
         borderStyle: "solid",
         borderWidth: globalStyle.standardBorderWidth,
         flexDirection: "row",
     },
-   
+    activeUsers: {
+        backgroundColor: "gray",
+
+    }
 
 })

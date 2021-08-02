@@ -62,21 +62,13 @@ export default LoginRegScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: globalStyle.mainBackgroundColor,
         padding: globalStyle.mainWidthDistance,
         justifyContent: "space-around",
-        alignItems: "center",
-      },
-      containerWithUser: {
-        flex: 1,
-        backgroundColor: globalStyle.mainBackgroundColor,
-        padding: globalStyle.mainWidthDistance,
         alignItems: "center",
       },
       loginProviders: {
         flexDirection: "row",
         marginTop: globalStyle.elementMarginTop,
-        backgroundColor: globalStyle.mainBackgroundColor,
         height: 150,
         width: 150,
         justifyContent: "center",

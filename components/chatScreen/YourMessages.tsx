@@ -65,6 +65,7 @@ export default YourMessages
 const styles = StyleSheet.create({
     listContainer: {
         width: "100%",
+        paddingVertical: globalStyle.elementPadding,
     }
     
 })
