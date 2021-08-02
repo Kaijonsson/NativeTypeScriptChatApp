@@ -44,7 +44,6 @@ export default ChooseUsername
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: globalStyle.mainBackgroundColor,
         justifyContent: "space-around",
         alignItems: "center",
     },
@@ -74,6 +73,6 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
     },
     bottomDistance: {
-        paddingBottom: 20,
+        paddingBottom: globalStyle.elementPadding,
     }
 })

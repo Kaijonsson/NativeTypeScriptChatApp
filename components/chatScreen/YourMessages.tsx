@@ -54,7 +54,7 @@ const YourMessages = ({user}: userObject) => {
                         <List item={item} user={user}/>
                     </View>
                 )
-            }} extraData={input} ItemSeparatorComponent={itemSeparator} keyExtractor={(item, index) => index.toString()} 
+            }} extraData={input} inverted={true} ItemSeparatorComponent={itemSeparator} keyExtractor={(item, index) => index.toString()} 
 />
         </View>
     )
@@ -65,6 +65,7 @@ export default YourMessages
 const styles = StyleSheet.create({
     listContainer: {
         width: "100%",
+        paddingVertical: globalStyle.elementPadding,
     }
     
 })
