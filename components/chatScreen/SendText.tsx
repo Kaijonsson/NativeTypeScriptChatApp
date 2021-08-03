@@ -19,7 +19,6 @@ const SendText = ({userCredentials }: userMessageProp) => {
 
   const [input, setInput] = useState(String)
 
-
   const sendMessage = ()=> {
     setInput("")
     if(input === ""){

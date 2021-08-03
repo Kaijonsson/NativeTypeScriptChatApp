@@ -17,14 +17,12 @@ const ChatScreen = ({route}: Props) => {
     return (
         <View style={styles.container}>
             <View style={styles.chatWindow}>
-            <View style={styles.listContainer}>
-
+                <View style={styles.listContainer}>
+                    <View style={styles.activeUsers}>
+                        <ActiveUserList/>
+                </View>
                     <YourMessages user={userObject}/>
                     </View>
-
-                <View style={styles.activeUsers}>
-                    <ActiveUserList/>
-                </View>
             </View>
                 <SendText userCredentials={userObject} />
             <Logout/>
@@ -52,15 +50,14 @@ const styles = StyleSheet.create({
         borderColor: globalStyle.mainColorGreen,
         borderStyle: "solid",
         borderWidth: globalStyle.standardBorderWidth,
-        flexDirection: "row",
     },
     activeUsers: {
         flexGrow: 1,
-        borderLeftColor: globalStyle.mainColorGreen,
-        borderLeftWidth: globalStyle.standardBorderWidth,
+        borderBottomColor: globalStyle.mainColorGreen,
+        borderBottomWidth: globalStyle.standardBorderWidth,
     },
     listContainer: {
-        paddingVertical: globalStyle.elementPadding,
+        paddingBottom: globalStyle.elementPadding,
         flexGrow: 4,
     },
 
