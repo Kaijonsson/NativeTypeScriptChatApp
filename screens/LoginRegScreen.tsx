@@ -33,9 +33,9 @@ const LoginRegScreen = () => {
               });
               
               if (result.type  === 'success') {
+                setLoading(true)
                 const credential = firebase.auth.GoogleAuthProvider.credential(result.idToken, result.accessToken);
                 firebase.auth().signInWithCredential(credential).then(()=> {
-                  setLoading(true)
                   const userId = firebase.auth().currentUser?.uid
                       firebase.database().ref("users/" + userId).set({
                         user: result.user.name,

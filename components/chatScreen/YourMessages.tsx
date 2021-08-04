@@ -1,18 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, FlatList, View } from 'react-native'
 
 import firebase from 'firebase'
-import "firebase/database"
-import { useEffect } from 'react'
+
 import globalStyle from '../../css/globalStyle'
 import List from './List'
 
 
 
-interface snap {
+interface ArrayOfUserObject {
     id: string,
     message: string,
     name: string,
+    
 }
 
 interface userObject {
@@ -22,11 +22,9 @@ interface userObject {
     }
 }
 
-
-
 const YourMessages = ({user}: userObject) => {
 
-    const [input, setInput] = useState<Array<snap>>([])
+    const [input, setInput] = useState<Array<ArrayOfUserObject>>([])
 
     useEffect(()=> {
         firebase.database().ref("posts").on("child_added", (snapshot)=> {
@@ -50,9 +48,7 @@ const YourMessages = ({user}: userObject) => {
 
             <FlatList data={input} renderItem={({item})=> {
                 return (
-                    <View>
                         <List item={item} user={user}/>
-                    </View>
                 )
             }} extraData={input} ItemSeparatorComponent={itemSeparator} keyExtractor={(item, index) => index.toString()} 
 />
