@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, createRef} from 'react'
 import { StyleSheet, FlatList, View } from 'react-native'
 
 import firebase from 'firebase'
@@ -25,7 +25,9 @@ interface userObject {
 const YourMessages = ({user}: userObject) => {
 
     const [input, setInput] = useState<Array<ArrayOfUserObject>>([])
+    const flatListRef = createRef<FlatList>();
 
+    
     useEffect(()=> {
         firebase.database().ref("posts").on("child_added", (snapshot)=> {
             if(snapshot.exists()) {
@@ -46,7 +48,7 @@ const YourMessages = ({user}: userObject) => {
 
     return (
 
-            <FlatList data={input} renderItem={({item})=> {
+            <FlatList data={input} ref={flatListRef} onContentSizeChange={()=>flatListRef.current?.scrollToEnd({animated: true})} renderItem={({item})=> {
                 return (
                         <List item={item} user={user}/>
                 )
