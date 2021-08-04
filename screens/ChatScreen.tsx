@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, View, Platform } from 'react-native'
 import globalStyle from '../css/globalStyle'
 
 import Logout from '../components/Logout'
@@ -15,7 +15,9 @@ const ChatScreen = ({route}: Props) => {
 
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView 
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.container}>
             <View style={styles.chatWindow}>
                 <View style={styles.listContainer}>
                     <View style={styles.activeUsers}>
@@ -26,7 +28,9 @@ const ChatScreen = ({route}: Props) => {
             </View>
                 <SendText userCredentials={userObject} />
             <Logout/>
-        </View>
+        </KeyboardAvoidingView>
+
+        
     )
 }
 
