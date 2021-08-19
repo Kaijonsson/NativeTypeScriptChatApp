@@ -56,13 +56,12 @@ const styles = StyleSheet.create({
         borderWidth: globalStyle.standardBorderWidth,
     },
     activeUsers: {
-        flexGrow: 1,
         borderBottomColor: globalStyle.mainColorGreen,
         borderBottomWidth: globalStyle.standardBorderWidth,
     },
     listContainer: {
         paddingBottom: globalStyle.elementPadding,
-        flexGrow: 4,
+        flexGrow: 1,
     },
 
 })

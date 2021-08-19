@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "redmind-chat-app",
-    "slug": "redmind-chat-app",
+    "name": "chat-app",
+    "slug": "chat-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A chat app built in react-native/typescript. Back-end is firebase realtime database.",
+    "githubUrl": "https://github.com/Kaijonsson/redmind-chat-app"
   }
 }
