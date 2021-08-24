@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {createRef, useState} from "react";
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from "react-native";
 
 import globalStyle from "../../css/globalStyle"
@@ -30,9 +30,16 @@ const SendText = ({userCredentials }: userMessageProp) => {
     }
   }
 
+  const inputRef = createRef<TextInput>()
+
   return (
     <View style={styles.chatAndButton}>
-    <TextInput onChangeText={setInput} value={input} style={styles.textInput} placeholder="Chat..."/>
+    <TextInput autoFocus={true} 
+      ref={inputRef} 
+      onChangeText={setInput} 
+      value={input} 
+      style={styles.textInput} 
+      placeholder="Chat..."/>
     <TouchableOpacity onPress={sendMessage}>
       <View style={styles.button}>
         <Text style={styles.text}>Send</Text>
@@ -55,12 +62,11 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderWidth: globalStyle.standardBorderWidth,
     padding: globalStyle.elementPadding,
+    backgroundColor: globalStyle.mainBackgroundColor
 },
 chatAndButton: {
   flexDirection: "row",
-  minWidth: "95%",
-  zIndex: 1,
-  position: "relative",
+  backgroundColor: globalStyle.mainBackgroundColor
 },
 textInput: {
     fontSize: globalStyle.textFontSize,
