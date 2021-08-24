@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { KeyboardAvoidingView, StyleSheet, View, Platform } from 'react-native'
 import globalStyle from '../css/globalStyle'
 
@@ -13,11 +13,11 @@ const ChatScreen = ({route}: Props) => {
 
     const userObject = route.params.user
 
-
     return (
         <KeyboardAvoidingView 
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={styles.container}>
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}>
+                <Logout/>
             <View style={styles.chatWindow}>
                 <View style={styles.listContainer}>
                     <View style={styles.activeUsers}>
@@ -27,7 +27,6 @@ const ChatScreen = ({route}: Props) => {
                     </View>
             </View>
                 <SendText userCredentials={userObject} />
-            <Logout/>
         </KeyboardAvoidingView>
 
         
@@ -43,7 +42,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingBottom: globalStyle.elementPadding,
         paddingTop: globalStyle.elementPadding,
-        marginHorizontal: globalStyle.elementPadding,
     },
     chatWindow: {
         backgroundColor: "white",
